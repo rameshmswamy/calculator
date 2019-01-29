@@ -31,17 +31,17 @@ pipeline {
 		}
 		stage("Docker build") {
 			steps {
-				sh "docker build -t rameshmswamy/calculator ."
+				sh "docker build -t rameshms/calculator ."
 			}
 		}
 		stage("Docker push") {
 			steps {
-				sh "docker push rameshmswamy/calculator ."
+				sh "docker push rameshms/calculator"
 			}
 		}
 		stage("Deploy to staging") {
 			steps {
-				sh "docker run -d --rm -p 8765:8080 --name calculator rameshmswamy/calculator"
+				sh "docker run -d --rm -p 8765:8080 --name calculator rameshms/calculator"
 			}
 		}
 		stage("Acceptance test") {
