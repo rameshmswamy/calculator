@@ -36,6 +36,7 @@ pipeline {
 		}
 		stage("Docker push") {
 			steps {
+				sh "sudo docker login"
 				sh "docker push rameshms/calculator"
 			}
 		}
