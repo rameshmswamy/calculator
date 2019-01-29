@@ -24,5 +24,36 @@ pipeline {
 				publishHTML (target: [ reportDir: 'build/reports/checkstyle/', reportFiles: 'main.html', reportName: "Checkstyle Report" ])
 			}
 		}
+		stage("Package") {
+			steps {
+				sh "./gradlew build"
+			}
+		}
+		stage("Docker build") {
+			steps {
+				sh "docker build -t rameshmswamy/calculator ."
+			}
+		}
+		stage("Docker push") {
+			steps {
+				sh "docker push -t rameshmswamy/calculator ."
+			}
+		}
+		stage("Deploy to staging") {
+			steps {
+				sh "docker run -d --rm -p 8765:8080 --name calculator rameshmswamy/calculator"
+			}
+		}
+		stage("Acceptance test") {
+			steps {
+				sleep 60
+				sh "./acceptance_test.sh"
+			}
+		}
+	}
+	post {
+		always {
+			sh "docker stop calculator"
+		}
 	}
 }
