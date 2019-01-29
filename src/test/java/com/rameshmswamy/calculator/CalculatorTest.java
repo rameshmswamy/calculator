@@ -3,7 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test Application
+ * Test Application for Calculator
  */
 
 public class CalculatorTest {
