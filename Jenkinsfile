@@ -36,7 +36,7 @@ pipeline {
 		}
 		stage("Docker push") {
 			steps {
-				sh "docker push -t rameshmswamy/calculator ."
+				sh "docker push rameshmswamy/calculator ."
 			}
 		}
 		stage("Deploy to staging") {
