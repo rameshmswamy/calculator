@@ -34,12 +34,6 @@ pipeline {
 				sh "docker build -t rameshms/calculator ."
 			}
 		}
-		stage("Docker push") {
-			steps {
-				sh "sudo docker login -u rameshms"
-				sh "docker push rameshms/calculator"
-			}
-		}
 		stage("Deploy to staging") {
 			steps {
 				sh "docker run -d --rm -p 8765:8080 --name calculator rameshms/calculator"
